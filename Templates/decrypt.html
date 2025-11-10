@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decrypt Image</title>
+</head>
+<body>
+    <h1>Decrypt Image</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for msg in messages %}
+            <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select Encrypted Image:</label>
+        <input type="file" name="image" required><br><br>
+
+        <label>Enter Private Key:</label><br>
+        <textarea name="private_key" rows="10" cols="60" placeholder="Paste your private key here" required></textarea><br><br>
+
+        <button type="submit">Decrypt</button>
+    </form>
+
+    {% if decrypted_file %}
+        <p>Decrypted file: <a href="{{ decrypted_file }}" download>{{ decrypted_file }}</a></p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">Home</a>
+</body>
+</html>

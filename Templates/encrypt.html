@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encrypt Image</title>
+</head>
+<body>
+    <h1>Encrypt Image</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for msg in messages %}
+            <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select Image to Encrypt:</label>
+        <input type="file" name="image" required>
+        <button type="submit">Encrypt</button>
+    </form>
+
+    {% if encrypted_file %}
+        <p>Encrypted file: <a href="{{ encrypted_file }}" download>{{ encrypted_file }}</a></p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">Home</a>
+</body>
+</html>
